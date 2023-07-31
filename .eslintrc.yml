@@ -1,0 +1,136 @@
+env:
+  browser: true
+  es2021: true
+  node: true
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+  JSX: readonly
+extends: []
+plugins: []
+rules: {}
+settings: {}
+overrides:
+  - files:
+      - entry.js
+      - metro.config.ts
+      - app.config.ts
+      - metro.config.js
+      - app.config.js
+      - babel.config.js
+    parser: '@typescript-eslint/parser'
+    extends:
+      - prettier
+    plugins:
+      - prettier
+    rules:
+      prettier/prettier:
+        - 1
+        - {}
+        - usePrettierrc: true
+  - files:
+      - src/**/*.[jt]s?(x)
+      - src/*.[jt]s?(x)
+    extends:
+      - eslint:recommended
+      - plugin:react/recommended
+      - airbnb
+      - airbnb-typescript
+      - plugin:react/jsx-runtime
+      - plugin:import/recommended
+      - plugin:import/typescript
+      - plugin:react-hooks/recommended
+      - plugin:promise/recommended
+      - plugin:prettier/recommended
+      - plugin:react-native/all
+      - plugin:@tanstack/eslint-plugin-query/recommended
+      - prettier
+    plugins:
+      - '@tanstack/query'
+      - '@typescript-eslint'
+      - react
+      - react-native
+      - import
+      - promise
+      - prettier
+    parser: '@typescript-eslint/parser'
+    parserOptions:
+      project: ./tsconfig.json
+      ecmaFeatures:
+        jsx: true
+      ecmaVersion: latest
+      sourceType: module
+    rules:
+      prettier/prettier:
+        - 1
+        - {}
+        - usePrettierrc: true
+      # TODO: https://github.com/Intellicode/eslint-plugin-react-native/issues/330
+      react-native/no-raw-text: 0
+      react/jsx-props-no-spreading: 0
+      # react-native/no-raw-text:
+      #   - 1
+      #   - skip:
+      #       - Text.Text
+      #       - Text.Text.Text
+      #       - Text.Text.Text.Text
+      #       - Text.Text.Text.Text.Text
+      #       - Text.Text.Text.Text.Text.Text
+      #       - Badge
+      #       - Link
+      react/jsx-fragments:
+        - 1
+        - element
+      '@typescript-eslint/no-use-before-define': 0
+      import/prefer-default-export: 0
+      import/order:
+        - 1
+        - newlines-between: always
+          alphabetize:
+            order: asc
+          pathGroups:
+          - pattern: '@assets/**'
+            group: internal
+          - pattern: '@components/**'
+            group: internal
+          - pattern: '@config/**'
+            group: internal
+          - pattern: '@layout/**'
+            group: internal
+          - pattern: '@lib/**'
+            group: internal
+          - pattern: '@packages/**'
+            group: internal
+          - pattern: '@screens/**'
+            group: internal
+          - pattern: '@stack/**'
+            group: internal
+          - pattern: '@themes/**'
+            group: internal
+          groups:
+            - builtin
+            - external
+            - internal
+            - parent
+            - sibling
+            - index
+            - object
+            - type
+      react/style-prop-object: 0
+      react/function-component-definition:
+        - 2
+        - namedComponents: 'arrow-function'
+    settings:
+      react:
+        version: detect
+      import/parsers:
+        '@typescript-eslint/parser':
+          - .ts
+          - .tsx
+          - .json
+      import/resolver:
+        node:
+          moduleDirectory:
+            - node_modules
+        typescript:
+          alwaysTryTypes: true

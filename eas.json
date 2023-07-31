@@ -1,0 +1,34 @@
+{
+  "cli": {
+    "version": ">= 5.4.0"
+  },
+  "build": {
+    "production": {
+      "pnpm": "8.8.0",
+      "node": "18.18.0",
+      "prebuildCommand": "prebuild --npm",
+      "android": {
+        "image": "latest"
+      }
+    },
+    "development": {
+      "extends": "production",
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "extends": "production",
+      "distribution": "internal"
+    },
+    "apk": {
+      "extends": "preview",
+      "android": {
+        "image": "latest",
+        "buildType": "apk"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
